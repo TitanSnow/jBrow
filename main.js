@@ -24,14 +24,16 @@
 
     if (sendMessageToAllPlugins({type: "beforeMaximize"})) nw.Window.get().maximize();
     nw.Window.get().on('new-win-policy', function (frame, url, policy) {
-        if (!sendMessageToAllPlugins({type: 'newWinPolicy', target: frame, url: url, policy: policy})) return;
+        if (!sendMessageToAllPlugins({type: 'beforeNewWinPolicy', target: frame, url: url, policy: policy})) return;
         policy.ignore();
         focusPage(createPage(url));
         flush();
+        sendMessageToAllPlugins({type: 'newWinPolicy', target: frame, url: url, policy: policy});
     });
     nw.Window.get().on('navigation', function (frame, url, policy) {
-        if (!sendMessageToAllPlugins({type: 'navigation', target: frame, url: url, policy: policy})) return;
+        if (!sendMessageToAllPlugins({type: 'beforeNavigation', target: frame, url: url, policy: policy})) return;
         flush();
+        sendMessageToAllPlugins({type: 'navigation', target: frame, url: url, policy: policy})
     });
     function hasPage(id) {
         return !(getTabById(id) === null && getContentById(id) === null);
@@ -424,6 +426,9 @@
         sendMessageToAllPlugins({type: "load"});
     });
     nw.Window.get().on("close", function () {
-        if (sendMessageToAllPlugins({type: "close"})) this.close(true);
+        if (sendMessageToAllPlugins({type: "beforeClose"})) {
+            this.close(true);
+            sendMessageToAllPlugins({type: "close"});
+        }
     })
 })();
