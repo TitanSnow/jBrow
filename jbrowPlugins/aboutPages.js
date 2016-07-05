@@ -29,6 +29,10 @@ emitter.addListener("URLChange", function (e) {
                         if (err) throw err;
                         var iframe_ele = doc.createElement("iframe");
                         iframe_ele.setAttribute("srcdoc", data.toString());
+                        iframe_ele.setAttribute("onload", "(" + (function () {
+                                var c = document.getElementsByTagName("iframe")[0];
+                                document.title = c.contentDocument.title;
+                            }).toString() + ")()");
                         doc.body.innerHTML = "";
                         doc.body.appendChild(iframe_ele);
                     })
