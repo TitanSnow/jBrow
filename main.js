@@ -16,11 +16,22 @@
     }
 
     var fs = require("fs");
-    var pluginDir = fs.readdirSync("./jbrowPlugins");
-    pluginDir.forEach(function (fn) {
-        plugins.push(require("./jbrowPlugins/" + fn));
-    });
+    try {
+        var pluginDir = fs.readdirSync("./jbrowPlugins");
+        pluginDir.forEach(function (fn) {
+            if (!/\.js$/.test(fn)) return;
+            try {
+                var md = require("./jbrowPlugins/" + fn);
+                if (md.onmessage)
+                    plugins.push(md);
+            } catch (err) {
+            }
+        });
+    } catch (err) {
+    }
     sendMessageToAllPlugins({type: "selfStart"});
+
+    var globalEventEmitter = new (require("events").EventEmitter)();
 
     if (sendMessageToAllPlugins({type: "beforeMaximize"})) nw.Window.get().maximize();
     nw.Window.get().on('new-win-policy', function (frame, url, policy) {
@@ -159,7 +170,7 @@
             var focusContent = getContentById(getFocusedPageId());
             if (url_input.value != focusContent.contentWindow.location.href) {
                 url_input.value = focusContent.contentWindow.location.href;
-                window.dispatchEvent(new Event("jbrowURLchange", {cancelable: true}));
+                globalEventEmitter.emit("jbrowURLchange");
             }
         } catch (err) {
         }
@@ -215,43 +226,35 @@
         e.setReturnValue = function (bl) {
             returnValue = bl;
         };
-        plugins[id].onmessage(e);
-        return returnValue;
+        try {
+            var fnReturn = plugins[id].onmessage(e);
+        } catch (err) {
+            return;
+        }
+        if (typeof fnReturn == "undefined")
+            return returnValue;
+        else return fnReturn;
     }
 
     function sendMessageToAllPlugins(e) {
         var returnValue = true;
         var continueSpread = true;
+        var fnReturn;
         e.stopSpread = function () {
             continueSpread = false;
         };
-        for (var i = 0; hasPlugin(i) && continueSpread; ++i) returnValue = sendMessageToPlugin(i, e) && returnValue;
+        for (var i = 0; hasPlugin(i) && continueSpread; ++i) {
+            fnReturn = sendMessageToPlugin(i, e);
+            if (typeof fnReturn == "undefined") fnReturn = true;
+            returnValue = fnReturn && returnValue;
+        }
         return returnValue;
     }
 
 
     setInterval(flush, 1000);
-    //setInterval(function () {
-    //    var cs=document.getElementsByClassName("content");
-    //    var ls, i, j,isFound,xhr;
-    //    for(i=0;i<cs.length;++i){
-    //        try{
-    //            isFound=false;
-    //            ls=cs[i].contentDocument.getElementsByTagName("link");
-    //            try {
-    //                for (j = 0; j < ls.length; ++j){
-    //                    if(ls[j].rel=="icon"||ls[j].rel=="shortcut icon"){
-    //                        isFound=true;
-    //                        xhr=new cs[i].contentWindow.XMLHttpRequest;
-    //                        xhr.open("get",ls[j].href)
-    //                        break;
-    //                    }
-    //                }
-    //            }catch (err){}
-    //        }catch (err){}
-    //    }
-    //},400);
-    window.addEventListener("jbrowURLchange", function () {
+
+    globalEventEmitter.addListener("jbrowURLchange", function () {
         var c = getContentById(getFocusedPageId());
         if (!sendMessageToAllPlugins({type: "beforeURLChange", target: c})) return;
         if (c.contentDocument.readyState == "interactive" || c.contentDocument.readyState == "complete") doit();
