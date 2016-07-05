@@ -9,5 +9,6 @@
   "webkit": {
     "page-cache": true
   },
-  "version": "2a1"
+  "version": "2a2",
+  "license": "AGPL-3.0"
 }

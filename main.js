@@ -252,8 +252,8 @@
     //    }
     //},400);
     window.addEventListener("jbrowURLchange", function () {
-        if (!sendMessageToAllPlugins({type: "beforeURLChange"})) return;
         var c = getContentById(getFocusedPageId());
+        if (!sendMessageToAllPlugins({type: "beforeURLChange", target: c})) return;
         if (c.contentDocument.readyState == "interactive" || c.contentDocument.readyState == "complete") doit();
         else c.contentDocument.addEventListener("DOMContentLoaded", doit);
         function doit() {
@@ -316,7 +316,7 @@
             }
         }
 
-        sendMessageToAllPlugins({type: "URLChange"});
+        sendMessageToAllPlugins({type: "URLChange", target: c});
     });
     document.addEventListener("DOMContentLoaded", function () {
         if (!sendMessageToAllPlugins({type: "beforeReady"})) return;
