@@ -1,0 +1,13 @@
+{
+  "name":"jBrow",
+  "main":"jBrow.html",
+  "window":{
+    "frame":false,
+    "width":960,
+    "height":960
+  },
+  "webkit":{
+    "page-cache":true
+  },
+  "version":"1a3"
+}
