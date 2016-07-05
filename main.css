@@ -1,4 +1,4 @@
-body.full-fill{
+body.full-fill {
     width: 100vw;
     height: 100vh;
     box-sizing: border-box;
@@ -7,12 +7,14 @@ body.full-fill{
     border: none;
     overflow: hidden;
 }
-.full-fill:not(body){
+
+.full-fill:not(body) {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
 }
-.url-wrapper{
+
+.url-wrapper {
     width: 100%;
     height: 32px;
     margin: 0;
@@ -21,7 +23,8 @@ body.full-fill{
     box-sizing: border-box;
     z-index: 3;
 }
-.tab-wrapper{
+
+.tab-wrapper {
     width: 100%;
     height: 32px;
     margin: 0;
@@ -31,14 +34,16 @@ body.full-fill{
     display: -webkit-box;
     z-index: 3;
 }
-.content-wrapper{
+
+.content-wrapper {
     width: 100%;
     margin: 0;
     border: none;
     padding: 0;
     box-sizing: border-box;
 }
-.content{
+
+.content {
     box-sizing: border-box;
     margin: 0;
     border: none;
@@ -48,7 +53,8 @@ body.full-fill{
     z-index: 1;
     background-color: white;
 }
-#url{
+
+#url {
     border: none;
     padding-left: 7px;
     padding-right: 7px;
@@ -56,17 +62,19 @@ body.full-fill{
     padding-bottom: 0;
     line-height: 32px;
     height: 32px;
-    font-family: Consolas,'WenQuanYi Zen Hei Mono',monospace;
+    font-family: Consolas, 'WenQuanYi Zen Hei Mono', monospace;
+    font-size: 12px;
 }
-.tab{
+
+.tab {
     -webkit-box-flex: 1;
     line-height: 32px;
-    font-size: 10px;
+    font-size: 12px;
     cursor: pointer;
     background: lightgray;
     color: black;
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     margin: 0;
     padding: 0;
     border: none;
@@ -76,25 +84,30 @@ body.full-fill{
     display: block;
     text-align: left;
 }
-.tab:hover{
+
+.tab:hover {
     background: darkgray;
 }
-.tab:not(.current):focus{
+
+.tab:not(.current):focus {
     background: darkgray;
     outline: none;
 }
-.tab.current{
+
+.tab.current {
     background: dodgerblue;
     color: white;
 }
-.content.current{
+
+.content.current {
     display: block;
     z-index: 2;
     position: absolute;
     left: 0;
     top: 64px;
 }
-.add-tab,.minz,.maxz,.cloz{
+
+.add-tab, .minz, .maxz, .cloz {
     margin: 0;
     padding: 0;
     border: none;
@@ -103,70 +116,87 @@ body.full-fill{
     background: lightyellow;
     cursor: pointer;
 }
-.add-tab:hover{
+
+.add-tab:hover {
     background: purple;
 }
-.minz:hover{
+
+.minz:hover {
     background: gold;
 }
-.maxz:hover{
+
+.maxz:hover {
     background: lightgreen;
 }
-.cloz:hover{
+
+.cloz:hover {
     background: orangered;
 }
-.add-tab:focus{
+
+.add-tab:focus {
     background: purple;
     outline: none;
 }
-.minz:focus{
+
+.minz:focus {
     background: gold;
     outline: none;
 }
-.maxz:focus{
+
+.maxz:focus {
     background: lightgreen;
     outline: none;
 }
-.cloz:focus{
+
+.cloz:focus {
     background: orangered;
     outline: none;
 }
 
-.first-use .add-tab{
+.first-use .add-tab {
     background: purple;
 }
-.first-use .minz{
+
+.first-use .minz {
     background: gold;
 }
-.first-use .maxz{
+
+.first-use .maxz {
     background: lightgreen;
 }
-.first-use .cloz{
+
+.first-use .cloz {
     background: orangered;
 }
-.lefttop-app-drag{
+
+.lefttop-app-drag {
     -webkit-app-region: drag;
     background: lightyellow;
     width: 16px;
 }
-.righttop-app-drag{
+
+.righttop-app-drag {
     -webkit-app-region: drag;
     background: lightyellow;
     -webkit-box-flex: 0.5;
 }
-.url-wrapper>form{
+
+.url-wrapper > form {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     border: none;
 }
-body{
-    font-family: 'Microsoft YaHei UI Light','WenQuanYi Zen Hei','Microsoft YaHei UI',sans-serif;
+
+body {
+    font-family: 'Microsoft YaHei UI Light', 'WenQuanYi Zen Hei', 'Microsoft YaHei UI', sans-serif;
 }
-input, textarea, keygen, select, button{
+
+input, textarea, keygen, select, button {
     font-family: inherit;
 }
-.tab-icon>img{
+
+.tab-icon > img {
     width: 16px;
     height: 16px;
     vertical-align: middle;

@@ -1,13 +1,13 @@
 {
-  "name":"jBrow",
-  "main":"jBrow.html",
-  "window":{
-    "frame":false,
-    "width":960,
-    "height":960
+  "name": "jBrow",
+  "main": "jBrow.html",
+  "window": {
+    "frame": false,
+    "width": 960,
+    "height": 960
   },
-  "webkit":{
-    "page-cache":true
+  "webkit": {
+    "page-cache": true
   },
-  "version":"2a1"
+  "version": "2a1"
 }
