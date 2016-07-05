@@ -1,6 +1,8 @@
 # jBrow
 A light browser based on nwjs
 
+需要中文说明？[这里](README_ZH.md)
+
 ## feature
 * Light
 * Simple
