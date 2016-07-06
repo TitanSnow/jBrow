@@ -22,7 +22,7 @@ emitter.addListener("aboutPagesHit", function (e) {
                 }
             }
         });
-        var doc = e.getContext().getDocument();
+        var doc = e.target.contentDocument;
         var main_container = doc.createElement("div");
         var enabled_container = doc.createElement("div");
         var disabled_container = doc.createElement("div");
@@ -46,12 +46,18 @@ emitter.addListener("aboutPagesHit", function (e) {
             li.appendChild(doc.createTextNode(item));
             enabled_ul.appendChild(li);
         });
+        if (enabled.length == 0) {
+            enabled_head.appendChild(doc.createTextNode(" (none)"));
+        }
         disabled.forEach(function (item) {
             var li = doc.createElement("li");
             li.appendChild(doc.createTextNode(item));
             disabled_ul.appendChild(li);
         });
-        e.target.contentDocument.body.appendChild(main_container);
-        e.target.contentDocument.title = "jBrow Plugins";
+        if (disabled.length == 0) {
+            disabled_head.appendChild(doc.createTextNode(" (none)"));
+        }
+        doc.body.appendChild(main_container);
+        doc.title = "jBrow Plugins";
     }
 });
