@@ -22,8 +22,11 @@
             if (!/\.js$/.test(fn) || /^\./.test(fn)) return;
             try {
                 var md = require("./jbrowPlugins/" + fn);
-                if (md.onmessage)
+                if (md.onmessage) {
+                    md.__jbrowName = fn;
+                    md.__jbrowPath = "./jbrowPlugins/" + fn;
                     plugins.push(md);
+                }
             } catch (err) {
             }
         });

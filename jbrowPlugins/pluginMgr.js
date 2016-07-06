@@ -43,7 +43,47 @@ emitter.addListener("aboutPagesHit", function (e) {
         disabled_container.appendChild(disabled_ul);
         enabled.forEach(function (item) {
             var li = doc.createElement("li");
-            li.appendChild(doc.createTextNode(item));
+            li.appendChild(doc.createTextNode(item + " "));
+            var opt = doc.createElement("button");
+            opt.appendChild(doc.createTextNode("OPT 选项"));
+            opt.addEventListener("click", function () {
+                var con = e.getContext();
+                var pls = con.getPlugins();
+                var has = con.hasPlugin;
+                for (var i = 0; has(i); ++i) {
+                    if (pls[i].__jbrowName == item) {
+                        pls[i].onmessage({type: "pluginMgrOption", window: e.target.contentWindow});
+                        break;
+                    }
+                }
+            });
+            li.appendChild(opt);
+            var dis = doc.createElement("button");
+            dis.appendChild(doc.createTextNode("Disable 禁用"));
+            dis.addEventListener("click", function disFn() {
+                fs.rename("./jbrowPlugins/" + item, "./jbrowPlugins/." + item, function (err) {
+                    if (err) {
+                        e.target.contentWindow.alert("Fail! 失败！")
+                    }
+                });
+                this.textContent = "Take effect after reopen 重启jBrow后起效";
+                this.removeEventListener("click", disFn);
+                disabled_ul.appendChild(li);
+            });
+            li.appendChild(dis);
+            var del = doc.createElement("button");
+            del.appendChild(doc.createTextNode("Del 删除"));
+            del.addEventListener("click", function () {
+                if (e.target.contentWindow.confirm("Really wanna DELETE this plugin? If so, it will be lost for a really long time! \n\n真的要删除这个插件？你将会失去它很长时间，真的很长！")) {
+                    fs.unlink("./jbrowPlugins/" + item, function (err) {
+                        if (err) {
+                            e.target.contentWindow.alert("Fail! 失败！")
+                        }
+                    });
+                    li.remove();
+                }
+            });
+            li.appendChild(del);
             enabled_ul.appendChild(li);
         });
         if (enabled.length == 0) {
@@ -51,13 +91,45 @@ emitter.addListener("aboutPagesHit", function (e) {
         }
         disabled.forEach(function (item) {
             var li = doc.createElement("li");
-            li.appendChild(doc.createTextNode(item));
+            li.appendChild(doc.createTextNode(item + " "));
+            var en = doc.createElement("button");
+            en.appendChild(doc.createTextNode("Enable 启用"));
+            en.addEventListener("click", function enFn() {
+                fs.rename("./jbrowPlugins/" + item, "./jbrowPlugins/" + /^\.+(.*)$/.exec(item)[1], function (err) {
+                    if (err) {
+                        e.target.contentWindow.alert("Fail! 失败！")
+                    }
+                });
+                this.textContent = "Take effect after reopen 重启jBrow后起效";
+                this.removeEventListener("click", enFn);
+                enabled_ul.appendChild(li);
+            });
+            li.appendChild(en);
+            var del = doc.createElement("button");
+            del.appendChild(doc.createTextNode("Del 删除"));
+            del.addEventListener("click", function () {
+                if (e.target.contentWindow.confirm("Really wanna DELETE this plugin? If so, it will be lost for a really long time! \n\n真的要删除这个插件？你将会失去它很长时间，真的很长！")) {
+                    fs.unlink("./jbrowPlugins/" + item, function (err) {
+                        if (err) {
+                            e.target.contentWindow.alert("Fail! 失败！")
+                        }
+                    });
+                    li.remove();
+                }
+            });
+            li.appendChild(del);
             disabled_ul.appendChild(li);
         });
         if (disabled.length == 0) {
             disabled_head.appendChild(doc.createTextNode(" (none)"));
         }
+        doc.head.innerHTML = "<meta charset='UTF-8'/>";
+        doc.body.innerHTML = "";
         doc.body.appendChild(main_container);
         doc.title = "jBrow Plugins";
     }
+});
+
+emitter.addListener("pluginMgrOption", function (e) {
+    e.window.alert("Here is NOTHING");
 });

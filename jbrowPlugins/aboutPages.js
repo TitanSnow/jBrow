@@ -49,3 +49,7 @@ emitter.addListener("URLChange", function (e) {
         }
     }
 });
+
+emitter.addListener("pluginMgrOption", function (e) {
+    e.window.alert("Here is NOTHING");
+});
