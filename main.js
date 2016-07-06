@@ -233,8 +233,9 @@
         e.setReturnValue = function (bl) {
             returnValue = bl;
         };
+        var fnReturn;
         try {
-            var fnReturn = plugins[id].onmessage(e);
+            fnReturn = plugins[id].onmessage(e);
         } catch (err) {
             return;
         }
@@ -253,7 +254,9 @@
         for (var i = 0; hasPlugin(i) && continueSpread; ++i) {
             fnReturn = sendMessageToPlugin(i, e);
             if (typeof fnReturn == "undefined") fnReturn = true;
-            returnValue = fnReturn && returnValue;
+            if (fnReturn && returnValue) {
+                returnValue = fnReturn;
+            } else returnValue = fnReturn && returnValue;
         }
         return returnValue;
     }
@@ -262,71 +265,73 @@
     setInterval(flush, 1000);
 
     globalEventEmitter.addListener("jbrowURLchange", function () {
-        var c = getContentById(getFocusedPageId());
-        if (!sendMessageToAllPlugins({type: "beforeURLChange", target: c})) return;
-        if (c.contentDocument.readyState == "interactive" || c.contentDocument.readyState == "complete") doit();
-        else c.contentDocument.addEventListener("DOMContentLoaded", doit);
-        function doit() {
-            sendMessageToAllPlugins({type: "frameReady", target: c});
-            if (!sendMessageToAllPlugins({type: "beforeIconLoad", target: c})) return;
-            var ls = c.contentDocument.getElementsByTagName("link");
-            var is = [];
-            var icon_place;
-            try {
-                for (var i = 0; i < ls.length; ++i)try {
-                    if (ls[i].rel == "icon" || ls[i].rel == "shortcut icon") {
-                        is.push(ls[i]);
+        setTimeout(function () {
+            var c = getContentById(getFocusedPageId());
+            if (!sendMessageToAllPlugins({type: "beforeURLChange", target: c})) return;
+            if (c.contentDocument.readyState == "interactive" || c.contentDocument.readyState == "complete") doit();
+            else c.contentDocument.addEventListener("DOMContentLoaded", doit);
+            function doit() {
+                sendMessageToAllPlugins({type: "frameReady", target: c});
+                if (!sendMessageToAllPlugins({type: "beforeIconLoad", target: c})) return;
+                var ls = c.contentDocument.getElementsByTagName("link");
+                var is = [];
+                var icon_place;
+                try {
+                    for (var i = 0; i < ls.length; ++i)try {
+                        if (ls[i].rel == "icon" || ls[i].rel == "shortcut icon") {
+                            is.push(ls[i]);
+                        }
+                    } catch (err) {
                     }
                 } catch (err) {
                 }
-            } catch (err) {
-            }
-            if (!sendMessageToAllPlugins({type: "iconSelected", icons: is, target: c})) return;
-            if (is.length > 0) {
-                var icon = is[0];
-                var d = 1024;
-                is.forEach(function (i) {
-                    var sizes = i.sizes;
-                    sizes.forEach(function (size) {
-                        var re = /^(\d+)[Xx](\d+)$/;
-                        if (re.test(size)) {
-                            var sxy = re.exec(size);
-                            var x = Number(sxy[1]);
-                            var y = Number(sxy[2]);
-                            var my_d = Math.abs(x * y - 16 * 16);
-                            if (my_d <= d) {
+                if (!sendMessageToAllPlugins({type: "iconSelected", icons: is, target: c})) return;
+                if (is.length > 0) {
+                    var icon = is[0];
+                    var d = 1024;
+                    is.forEach(function (i) {
+                        var sizes = i.sizes;
+                        sizes.forEach(function (size) {
+                            var re = /^(\d+)[Xx](\d+)$/;
+                            if (re.test(size)) {
+                                var sxy = re.exec(size);
+                                var x = Number(sxy[1]);
+                                var y = Number(sxy[2]);
+                                var my_d = Math.abs(x * y - 16 * 16);
+                                if (my_d <= d) {
+                                    icon = i;
+                                    d = my_d;
+                                }
+                            } else if (size == "any") {
                                 icon = i;
-                                d = my_d;
+                                d = 0;
                             }
-                        } else if (size == "any") {
-                            icon = i;
-                            d = 0;
-                        }
+                        });
                     });
-                });
-                icon_place = getTabById(getPageId(c)).querySelector(".tab-icon");
-                icon_place.innerHTML = "";
-                var e_icon = document.createElement("img");
-                e_icon.src = icon.href;
-                e_icon.alt = "";
-                icon_place.appendChild(e_icon);
-                sendMessageToAllPlugins({type: "iconLoad", target: c, icon: e_icon});
-            } else {
-                icon_place = getTabById(getPageId(c)).querySelector(".tab-icon");
-                icon_place.innerHTML = "";
-                var fav_url = c.contentWindow.location.origin + "/favicon.ico";
-                var icon_img = document.createElement("img");
-                icon_img.src = fav_url;
-                icon_img.alt = "";
-                icon_img.addEventListener("load", function () {
+                    icon_place = getTabById(getPageId(c)).querySelector(".tab-icon");
                     icon_place.innerHTML = "";
-                    icon_place.appendChild(icon_img);
-                    sendMessageToAllPlugins({type: "iconLoad", target: c, icon: icon_img});
-                });
+                    var e_icon = document.createElement("img");
+                    e_icon.src = icon.href;
+                    e_icon.alt = "";
+                    icon_place.appendChild(e_icon);
+                    sendMessageToAllPlugins({type: "iconLoad", target: c, icon: e_icon});
+                } else {
+                    icon_place = getTabById(getPageId(c)).querySelector(".tab-icon");
+                    icon_place.innerHTML = "";
+                    var fav_url = c.contentWindow.location.origin + "/favicon.ico";
+                    var icon_img = document.createElement("img");
+                    icon_img.src = fav_url;
+                    icon_img.alt = "";
+                    icon_img.addEventListener("load", function () {
+                        icon_place.innerHTML = "";
+                        icon_place.appendChild(icon_img);
+                        sendMessageToAllPlugins({type: "iconLoad", target: c, icon: icon_img});
+                    });
+                }
             }
-        }
 
-        sendMessageToAllPlugins({type: "URLChange", target: c});
+            sendMessageToAllPlugins({type: "URLChange", target: c});
+        }, 0);
     });
     document.addEventListener("DOMContentLoaded", function () {
         if (!sendMessageToAllPlugins({type: "beforeReady"})) return;
@@ -376,8 +381,6 @@
         url_input.parentNode.addEventListener("submit", function (e) {
             e.preventDefault();
             var url = url_input.value;
-            //if(/^\?/.test(url)) url="https://cn.bing.com/search?q="+encodeURIComponent(/^\?(.*)$/.exec(url)[1]);
-            //else if(!/:\/\//.test(url)) url="http://"+url;
             var u = document.createElement("input");
             u.type = "url";
             u.value = url;
@@ -393,6 +396,7 @@
             url_input.value = getContentById(getFocusedPageId()).contentWindow.location.href;
             getContentById(getFocusedPageId()).src = url;
             url_input.blur();
+            if (url_input.value == url) globalEventEmitter.emit("jbrowURLchange");
         });
         sendMessageToAllPlugins({type: "ready"});
     });
