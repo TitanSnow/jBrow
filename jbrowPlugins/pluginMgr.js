@@ -140,6 +140,9 @@ emitter.addListener("aboutPagesHit", function (e) {
         var tip = doc.createElement("p");
         tip.innerHTML = "You may think this page is ugly. Would you like to do something for it? <a href='https://github.com/TitanSnow/jBrow'>jBrow on GitHub</a>";
         doc.body.appendChild(tip);
+        tip = doc.createElement("p");
+        tip.textContent = "In jBrow, there is no difference between the meanings of \"plugin\" and \"extension\". What's more, Chromium extensions or plugins CANNOT be installed on jBrow";
+        doc.body.appendChild(tip);
         doc.title = "jBrow Plugins";
     }
 });

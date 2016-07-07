@@ -10,6 +10,7 @@
     background-size: 32px 32px;
     cursor: pointer;
     background-color: white;
+    transition: all 0.2s;
 }
 
 .pluginBack2Dec-forward-btn {

@@ -30,3 +30,11 @@ emitter.addListener("ready", function (e) {
     url_wrapper.insertBefore(back_btn, forward_btn);
     con.importCSS("./jbrowPlugins/back2Dec.css");
 });
+
+emitter.addListener("pluginMgrOption", function (e) {
+    e.window.alert("Here is NOTHING");
+});
+
+emitter.addListener("pluginMgrInfo", function (e) {
+    e.setReturnValue("back2Dec ain't a song's name. It makes you be able to go back to prev web page and go forward to next web page. ");
+});
