@@ -9,7 +9,6 @@
     background: url("back2Dec_back.svg");
     background-size: 32px 32px;
     cursor: pointer;
-    background-color: white;
     transition: all 0.2s;
 }
 
@@ -26,7 +25,20 @@
 }
 
 .pluginBack2Dec-back-btn:hover, .pluginBack2Dec-forward-btn:hover {
-    z-index: 4;
     box-shadow: 0 0 7px rgb(0, 42, 81);
     border-radius: 4px;
+    background-color: white;
+}
+
+.pluginBack2Dec-back-btn:active {
+    transform: scale(0.8, 0.8);
+}
+
+.pluginBack2Dec-forward-btn:active {
+    transform: rotate(180deg) scale(0.8, 0.8);
+}
+
+.pluginBack2Dec-back-btn:active, .pluginBack2Dec-forward-btn:active {
+    outline: none;
+    box-shadow: none;
 }
