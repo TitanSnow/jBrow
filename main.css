@@ -25,6 +25,7 @@ body.full-fill {
     position: fixed;
     top: 32px;
     left: 0;
+    display: -webkit-box;
 }
 
 .tab-wrapper {
@@ -192,6 +193,7 @@ body.full-fill {
     margin: 0;
     padding: 0;
     border: none;
+    -webkit-box-flex: 1;
 }
 
 body {
