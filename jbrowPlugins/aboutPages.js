@@ -46,6 +46,9 @@ emitter.addListener("URLChange", function (e) {
                 }).toString() + ")()");
             doc.body.innerHTML = "";
             doc.body.appendChild(iframe_ele);
+            setTimeout(function () {
+                iframe_ele.contentWindow.close = win.close;
+            }, 0);
         }
     }
 });
