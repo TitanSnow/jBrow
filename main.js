@@ -355,7 +355,7 @@
             if (argv.hasOwnProperty("open_url")) {
                 focusPage(createPage(argv.open_url));
             } else {
-                focusPage(createPage("https://www.bing.com"));
+                focusPage(createPage("about:home"));
             }
             homed = true;
         }
