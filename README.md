@@ -11,7 +11,7 @@ A light browser based on nwjs
 
 ## How to install
 1. Download [nwjs](http://nwjs.io/) then unzip it
-2. Put all of the files of [jBrow](https://github.com/TitanSnow/jBrow/releases) (package.nw) into the folder of nwjs
+2. Put [jBrow](https://github.com/TitanSnow/jBrow/releases) (package.nw) into the folder of nwjs
 3. Run the executable file "nw" then enjoy yourself
 
 ## License
