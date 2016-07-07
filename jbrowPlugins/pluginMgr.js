@@ -134,6 +134,7 @@ emitter.addListener("aboutPagesHit", function (e) {
         doc.head.innerHTML = "<meta charset='UTF-8'/><style>button{margin-left: 7px;}li{margin-bottom: 13px;}</style>";
         doc.body.innerHTML = "";
         doc.body.appendChild(main_container);
+        doc.body.innerHTML += "<p>You may think this page is ugly. Would you like to do something for it? <a href='https://github.com/TitanSnow/jBrow'>jBrow on GitHub</a></p>";
         doc.title = "jBrow Plugins";
     }
 });
