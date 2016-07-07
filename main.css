@@ -22,6 +22,9 @@ body.full-fill {
     padding: 0;
     box-sizing: border-box;
     z-index: 3;
+    position: fixed;
+    top: 32px;
+    left: 0;
 }
 
 .tab-wrapper {
@@ -33,6 +36,9 @@ body.full-fill {
     box-sizing: border-box;
     display: -webkit-box;
     z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .content-wrapper {
@@ -102,7 +108,7 @@ body.full-fill {
 .content.current {
     display: block;
     z-index: 2;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 64px;
 }
