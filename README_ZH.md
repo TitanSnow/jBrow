@@ -9,7 +9,7 @@
 
 ## 安装
 1. 下载 [nwjs](http://nwjs.io/) 接着解压它
-2. 把所有 [jBrow](https://github.com/TitanSnow/jBrow/releases) (package.nw) 的文件放入nwjs的文件夹
+2. 把 [jBrow](https://github.com/TitanSnow/jBrow/releases) (package.nw) 放入nwjs的文件夹
 3. 运行可执行文件"nw"，then enjoy yourself !
 
 ## 许可证
