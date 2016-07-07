@@ -393,7 +393,7 @@
                 if (u.checkValidity() && /^\S+?\.\S+$/.test(url)) {
                     url = new_url;
                 } else {
-                    url = "https://www.bing.com/search?q=" + encodeURIComponent(url);
+                    url = "about:search?q=" + encodeURIComponent(url);
                 }
             }
             url_input.value = getContentById(getFocusedPageId()).contentWindow.location.href;

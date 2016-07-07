@@ -14,8 +14,8 @@ emitter.addListener("URLChange", function (e) {
     if (doc.readyState == "interactive" || doc.readyState == "complete") doit();
     doc.addEventListener("DOMContentLoaded", doit);
     function doit() {
-        if (/^about:[\w-]+$/.test(win.location.href)) {
-            var page_name = /^about:([\w-]+)$/.exec(win.location.href)[1];
+        if (/^about:/.test(win.location.href)) {
+            var page_name = /^about:(.+)$/.exec(win.location.href)[1];
             if (e.getContext().sendMessageToAllPlugins({type: "aboutPagesHit", page_name: page_name, target: c}))
                 fs.exists("./jbrowAboutpages/" + page_name + ".html", function (exists) {
                     if (exists) {
