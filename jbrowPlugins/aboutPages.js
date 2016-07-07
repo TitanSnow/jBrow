@@ -53,3 +53,7 @@ emitter.addListener("URLChange", function (e) {
 emitter.addListener("pluginMgrOption", function (e) {
     e.window.alert("Here is NOTHING");
 });
+
+emitter.addListener("pluginMgrInfo", function (e) {
+    e.setReturnValue("AboutPages makes about pages (pages with URL about:*) be shown. Some setting require it. Strongly recommend NOT disabling it. ");
+});
