@@ -42,3 +42,7 @@
     outline: none;
     box-shadow: none;
 }
+
+.url-wrapper {
+    background-color: white;
+}

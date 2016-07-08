@@ -40,6 +40,7 @@ body.full-fill {
     position: fixed;
     top: 0;
     left: 0;
+    background-color: lightyellow;
 }
 
 .content-wrapper {
@@ -90,6 +91,7 @@ body.full-fill {
     border-right: solid 1px gray;
     display: block;
     text-align: left;
+    transition: background 0.2s;
 }
 
 .tab:hover {
@@ -120,10 +122,21 @@ body.full-fill {
     border: none;
     width: 32px;
     height: 32px;
-    background: lightyellow;
+    background: transparent;
     cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 16px;
+    transform: scale(0.7, 0.7);
 }
 
+.add-tab:hover, .minz:hover, .maxz:hover, .cloz:hover {
+    border-radius: 0;
+    transform: scale(1, 1);
+}
+
+.add-tab:active, .minz:active, .maxz:active, .cloz:active {
+    box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.3);
+}
 .add-tab:hover {
     background: purple;
 }
@@ -178,13 +191,13 @@ body.full-fill {
 
 .lefttop-app-drag {
     -webkit-app-region: drag;
-    background: lightyellow;
+    background: transparent;
     width: 16px;
 }
 
 .righttop-app-drag {
     -webkit-app-region: drag;
-    background: lightyellow;
+    background: transparent;
     -webkit-box-flex: 0.5;
 }
 
