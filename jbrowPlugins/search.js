@@ -32,20 +32,20 @@ emitter.addListener("pluginMgrOption", function (e) {
     var old_url = e.getContext().getWindow().localStorage.getItem("pluginSearch_searchEngine");
     var new_url = e.window.prompt("Current search engine is " + old_url + "\n\nPlease write down the URL of new search engine here\n\n\n当前的搜索引擎是：" + old_url + "\n\n请在这里写下新搜索引擎的网址");
     if (typeof new_url == "string") {
-        // var doc = e.window.document;
-        // var u = doc.createElement("input");
-        // u.type = "url";
-        // u.value = new_url;
-        // if (!u.checkValidity()) {
-        //     var _new_url = "http://" + new_url;
-        //     u.value = _new_url;
-        //     if (u.checkValidity() && /^\S+?\.\S+$/.test(new_url)) {
-        //         new_url = _new_url;
-        //     } else {
-        //         e.window.alert("Incorrect URL! \n\n非法的网址！");
-        //         return;
-        //     }
-        // }
+        var doc = e.window.document;
+        var u = doc.createElement("input");
+        u.type = "url";
+        u.value = new_url;
+        if (!u.checkValidity()) {
+            var _new_url = "http://" + new_url;
+            u.value = _new_url;
+            if (u.checkValidity() && /^\S+?\.\S+$/.test(new_url)) {
+                new_url = _new_url;
+            } else {
+                e.window.alert("Incorrect URL! \n\n非法的网址！");
+                return;
+            }
+        }
         e.getContext().getWindow().localStorage.setItem("pluginSearch_searchEngine", new_url);
         e.window.alert("Succeed 成功");
     } else e.window.alert("Abort 操作终止");
