@@ -6,7 +6,7 @@ A light browser based on nwjs
 ## feature
 * Light
 * Simple
-* No record of activities
+* No record of activities <sub style="font-size:6pt">if you like</sub>
 * Expansibility
 
 ## How to install
