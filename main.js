@@ -223,13 +223,27 @@
         JBrow_context.prototype.sendMessageToPlugin = sendMessageToPlugin;
         JBrow_context.prototype.hasPlugin = hasPlugin;
         JBrow_context.prototype.sendMessageToAllPlugins = sendMessageToAllPlugins;
-        JBrow_context.prototype.importCSS = function (filename) {
-            var doc = this.getDocument();
-            var link = doc.createElement("link");
-            link.rel = "stylesheet";
-            link.href = filename;
-            doc.body.appendChild(link);
-        };
+        JBrow_context.prototype.importCSS = (function () {
+            function oldImport(filename) {
+                var doc = this.getDocument();
+                var link = doc.createElement("link");
+                link.rel = "stylesheet";
+                link.href = filename;
+                doc.body.appendChild(link);
+            }
+
+            return function (doc, fn) {
+                if (typeof fn == "undefined") oldImport.apply(this, arguments);
+                else {
+                    fs.readFile(fn, function (err, data) {
+                        if (err) throw err;
+                        var style = doc.createElement("style");
+                        style.appendChild(doc.createTextNode(data.toString()));
+                        doc.body.appendChild(style);
+                    });
+                }
+            }
+        })();
         e.getContext = function () {
             return new JBrow_context();
         };

@@ -131,10 +131,8 @@ emitter.addListener("aboutPagesHit", function (e) {
         if (disabled.length == 0) {
             disabled_head.appendChild(doc.createTextNode(" (none)"));
         }
-        fs.readFile("./jbrowPlugins/pluginMgrPage.css", function (err, data) {
-            if (err) throw err;
-            doc.head.innerHTML = "<meta charset='UTF-8'/><style>" + data.toString() + "</style>";
-        });
+        doc.head.innerHTML = "<meta charset='UTF-8'/>";
+        e.getContext().importCSS(e.target.contentDocument, "./jbrowPlugins/pluginMgrPage.css");
         doc.body.innerHTML = "";
         doc.body.appendChild(main_container);
         var tip = doc.createElement("p");
