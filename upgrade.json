@@ -1,0 +1,16 @@
+{
+  "lastestVersions": {
+    "real-time": {
+      "version": "v2a6r",
+      "link": "https://github.com/TitanSnow/jBrow/archive/master.zip"
+    },
+    "alpha": {
+      "version": "v2a6",
+      "link": "https://github.com/TitanSnow/jBrow/releases/download/v2a6/package.nw"
+    },
+    "beta": {
+    },
+    "release": {
+    }
+  }
+}
