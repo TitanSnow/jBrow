@@ -7,25 +7,36 @@ var emitter = new events.EventEmitter();
 exports.onmessage = function (e) {
     emitter.emit(e.type, e);
 };
+
+var knownPages = {};
+
 emitter.addListener("URLChange", function (e) {
     var c = e.target;
     var win = c.contentWindow;
     var doc = win.document;
     if (doc.readyState == "interactive" || doc.readyState == "complete") doit();
-    doc.addEventListener("DOMContentLoaded", doit);
+    else doc.addEventListener("DOMContentLoaded", doit);
     function doit() {
+        var id = e.getContext().getPageId(c);
         if (/^about:/.test(win.location.href)) {
             var page_name = /^about:(.+)$/.exec(win.location.href)[1];
-            if (e.getContext().sendMessageToAllPlugins({type: "aboutPagesHit", page_name: page_name, target: c}))
-                fs.exists("./jbrowAboutpages/" + page_name + ".html", function (exists) {
-                    if (exists) {
-                        loadCSS();
-                        fs.readFile("./jbrowAboutpages/" + page_name + ".html", function (err, data) {
-                            if (err) throw err;
-                            setSrcdoc(data.toString());
-                        })
-                    }
-                })
+            if (!knownPages.hasOwnProperty(id) || knownPages[id] != page_name) {
+                knownPages[id] = page_name;
+                if (e.getContext().sendMessageToAllPlugins({type: "aboutPagesHit", page_name: page_name, target: c}))
+                    fs.exists("./jbrowAboutpages/" + page_name + ".html", function (exists) {
+                        if (exists) {
+                            loadCSS();
+                            fs.readFile("./jbrowAboutpages/" + page_name + ".html", function (err, data) {
+                                if (err) throw err;
+                                setSrcdoc(data.toString());
+                            })
+                        }
+                    });
+            }
+        } else {
+            if (knownPages.hasOwnProperty(id)) {
+                delete knownPages[id];
+            }
         }
         function loadCSS() {
             fs.readFile("./jbrowAboutpages/aboutPages.css", function (err, data) {
