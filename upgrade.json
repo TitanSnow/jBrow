@@ -2,13 +2,15 @@
   "lastestVersions": {
     "alpha": {
       "version": "v2a6",
-      "link": "https://github.com/TitanSnow/jBrow/archive/v2a6.zip"
+      "link": "https://github.com/TitanSnow/jBrow/releases/"
     },
     "beta": {
-      "version": "none"
+      "version": "none",
+      "link": "https://github.com/TitanSnow/jBrow/releases/"
     },
     "release": {
-      "version": "none"
+      "version": "none",
+      "link": "https://github.com/TitanSnow/jBrow/releases/"
     }
   }
 }
