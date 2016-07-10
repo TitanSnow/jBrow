@@ -1,0 +1,42 @@
+.pluginUpgrade-upgradeTip {
+    position: fixed;
+    left: 0;
+    top: 64px;
+    box-sizing: border-box;
+    height: 26px;
+    width: 100vw;
+    font-size: 14px;
+    line-height: 26px;
+    padding-left: 7px;
+    padding-right: 7px;
+    overflow: hidden;
+    background-color: lightyellow;
+    opacity: 0.3;
+    z-index: 3;
+    transition: opacity 1s;
+}
+
+.pluginUpgrade-upgradeTip:hover {
+    opacity: 0.8;
+}
+
+.pluginUpgrade-upgradeTip > .ok {
+    background: dodgerblue;
+    color: white;
+    border: none;
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 13px;
+    padding-right: 13px;
+    border-radius: 5px;
+    height: 26px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.pluginUpgrade-upgradeTip > .no, .pluginUpgrade-upgradeTip > .noForever {
+    text-decoration: underline;
+    margin-left: 15px;
+    cursor: pointer;
+}
