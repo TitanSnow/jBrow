@@ -66,7 +66,7 @@ emitter.addListener("selfStart", function (e) {
     });
 });
 
-emitter.addListener("close", function (e) {
+emitter.addListener("beforeClose", function (e) {
     var ls = e.getContext().getWindow().localStorage;
     ls.setItem("pluginHistory_history", JSON.stringify({list: history}));
 });
@@ -93,4 +93,9 @@ emitter.addListener("pluginMgrOption", function (e) {
 
 emitter.addListener("pluginMgrInfo", function (e) {
     e.setReturnValue("History provides you with URL prediction from history when typing URL in URL bar. (But it doesn't support display of history) ");
+});
+
+emitter.addListener("pluginHistoryViewGetHistory", function (e) {
+    e.stopSpread();
+    e.setReturnValue(history);
 });
