@@ -442,8 +442,8 @@
                 intro_js.addEventListener("load", function () {
                     document.body.classList.add("first-use");
                     introJs().setOptions({
-                        prevLabel: "Prev 上一步",
-                        nextLabel: "Next 下一步",
+                        prevLabel: "&larr; Prev 上一步",
+                        nextLabel: "Next 下一步 &rarr;",
                         skipLabel: "Skip 跳过",
                         doneLabel: "Done! 大功告成！"
                     }).oncomplete(function () {
