@@ -7,7 +7,7 @@ exports.onmessage = function (e) {
         var con = e.getContext();
         var XMLHttpRequest = con.getWindow().XMLHttpRequest;
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "https://raw.githubusercontent.com/TitanSnow/jBrow/master/upgrade.json");
+        xhr.open("GET", "https://raw.githubusercontent.com/TitanSnow/jBrow/trois/upgrade.json");
         xhr.send();
         xhr.onreadystatechange = function () {
             if (this.readyState == 4) {
