@@ -1,7 +1,7 @@
 .pluginSearch-dialog {
     width: 500px;
     height: 300px;
-    position: absolute;
+    position: fixed;
     left: calc(50vw - 500px / 2);
     top: calc(50vh - 300px / 2);
     border: solid 1px black;
