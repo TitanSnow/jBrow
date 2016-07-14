@@ -37,3 +37,11 @@ emitter.addListener("beforeClose", function (e) {
         y: nw_win.y
     }));
 });
+
+emitter.addListener("pluginMgrOption", function (e) {
+    e.window.alert("Here is NOTHING");
+});
+
+emitter.addListener("pluginMgrInfo", function (e) {
+    e.setReturnValue("LastSize remembers the last window size and restore it when opening new window. ");
+});
