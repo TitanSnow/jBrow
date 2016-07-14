@@ -26,6 +26,7 @@ body.full-fill {
     top: 32px;
     left: 0;
     display: -webkit-box;
+    background-color: white;
 }
 
 .tab-wrapper {
