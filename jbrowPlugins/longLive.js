@@ -46,6 +46,7 @@ emitter.on("beforeClose", function (e) {
         }
         fs.unlink("./pid");
         nw_win.show();
+        nw_win.focus();
     }, 0);
 });
 
