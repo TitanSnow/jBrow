@@ -13,7 +13,6 @@
 3. 下载 [nwjs](http://nwjs.io/) 接着解压它
 4. 下载 [jBrow](https://github.com/TitanSnow/jBrow/releases) 的源码包并解压，接着把根文件夹里面所有的东西放到nwjs的文件夹内
 5. 用 node.js 运行 "launcher.js"
-6. 如果无法运行，删除文件夹内的"pid"文件
 
 ## 许可证
 GNU AGPLv3

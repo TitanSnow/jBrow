@@ -15,7 +15,6 @@ A light browser based on nwjs
 3. Download [nwjs](http://nwjs.io/) then unzip it
 4. Download the source code of [jBrow](https://github.com/TitanSnow/jBrow/releases), unpack it, then put all of the things inside the root folder into the folder of nwjs
 5. Use node.js to run "launcher.js" then enjoy yourself!
-6. If it does not work, delete file "pid" in the folder
 
 ## License
 GNU AGPLv3
