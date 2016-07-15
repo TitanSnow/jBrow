@@ -21,6 +21,7 @@ emitter.on("beforeClose", function (e) {
     tabs.forEach(function (e) {
         con.removePage(con.getPageId(e));
     });
+    tabs = null;
     con.focusPage(con.createPage("about:home"));
     setTimeout(function () {
         fs.writeFileSync("./pid", process.pid.toString());
