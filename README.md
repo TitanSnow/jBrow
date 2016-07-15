@@ -10,7 +10,7 @@ A light browser based on nwjs
 * Expansibility
 
 ## How to install
-1. Make sure you have installed [python3](https://www.python.org/)
+1. Make sure you have installed [python](https://www.python.org/)
 3. Download [nwjs](http://nwjs.io/) then unzip it
 4. Download the source code of [jBrow](https://github.com/TitanSnow/jBrow/releases), unpack it, then put all of the things inside the root folder into the folder of nwjs
 5. Run "launcher.sh" for Linux or "launcher.bat" for Windows, then enjoy yourself!
