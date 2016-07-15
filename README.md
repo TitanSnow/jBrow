@@ -6,13 +6,16 @@ A light browser based on nwjs
 ## feature
 * Light
 * Simple
-* No record of activities <sub style="font-size:6pt">if you like</sub>
+* No record of activities <sub style="font-size:4pt">if you like</sub>
 * Expansibility
 
 ## How to install
-1. Download [nwjs](http://nwjs.io/) then unzip it
-2. Download the source code of [jBrow](https://github.com/TitanSnow/jBrow/releases), unpack it, then put all of the things inside the root folder into the folder of nwjs
-3. Run the executable file "nw" then enjoy yourself
+1. Make sure you have installed [node.js](https://nodejs.org) (>=0.11.12)
+2. Make sure you have installed [python3](https://www.python.org/)
+3. Download [nwjs](http://nwjs.io/) then unzip it
+4. Download the source code of [jBrow](https://github.com/TitanSnow/jBrow/releases), unpack it, then put all of the things inside the root folder into the folder of nwjs
+5. Use node.js to run "launcher.js" then enjoy yourself!
+6. If it does not work, delete file "pid" in the folder
 
 ## License
 GNU AGPLv3
