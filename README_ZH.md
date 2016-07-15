@@ -4,13 +4,16 @@
 ## 特征
 * 轻
 * 简
-* 无痕 <sub style="font-size:6pt">（只要你愿意）</sub>
+* 无痕 <sub style="font-size:4pt">（只要你愿意）</sub>
 * 可拓展
 
 ## 安装
-1. 下载 [nwjs](http://nwjs.io/) 接着解压它
-2. 下载 [jBrow](https://github.com/TitanSnow/jBrow/releases) 的源码包并解压，接着把根文件夹里面所有的东西放到nwjs的文件夹内
-3. 运行可执行文件"nw"，then enjoy yourself !
+1. 安装 [node.js](https://nodejs.org) (>=0.11.12)
+2. 安装 [python3](https://www.python.org/)
+3. 下载 [nwjs](http://nwjs.io/) 接着解压它
+4. 下载 [jBrow](https://github.com/TitanSnow/jBrow/releases) 的源码包并解压，接着把根文件夹里面所有的东西放到nwjs的文件夹内
+5. 用 node.js 运行 "launcher.js"
+6. 如果无法运行，删除文件夹内的"pid"文件
 
 ## 许可证
 GNU AGPLv3
