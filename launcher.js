@@ -16,6 +16,10 @@ try {
     }
 } catch (err) {
     try {
+        cp.execSync("chmod +x ./nw");
+    } catch (err) {
+    }
+    try {
         cp.execFileSync("./nw");
     } catch (err) {
         console.log("Failed to launch! ");

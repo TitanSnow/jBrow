@@ -22,27 +22,37 @@ emitter.on("beforeClose", function (e) {
         con.removePage(con.getPageId(e));
     });
     con.focusPage(con.createPage("about:home"));
-    fs.writeFileSync("./pid", process.pid.toString());
-    process.on("exit", function () {
+    setTimeout(function () {
+        fs.writeFileSync("./pid", process.pid.toString());
+        process.on("exit", function () {
+            try {
+                nw_win.hide();
+            } catch (err) {
+            }
+            try {
+                fs.unlinkSync("./pid");
+            } catch (err) {
+            }
+        });
         try {
-            nw_win.hide();
+            cp.execSync("chmod +x ./listener.py");
         } catch (err) {
         }
         try {
-            fs.unlinkSync("./pid");
+            cp.execFileSync("./listener.py");
         } catch (err) {
+            process.exit();
+            throw err;
         }
-    });
-    try {
-        cp.execSync("chmod +x ./listener.py");
-    } catch (err) {
-    }
-    try {
-        cp.execFileSync("./listener.py");
-    } catch (err) {
-        process.exit();
-        throw err;
-    }
-    fs.unlink("./pid");
-    nw_win.show();
+        fs.unlink("./pid");
+        nw_win.show();
+    }, 0);
+});
+
+emitter.addListener("pluginMgrOption", function (e) {
+    e.window.alert("Here is NOTHING");
+});
+
+emitter.addListener("pluginMgrInfo", function (e) {
+    e.setReturnValue("LongLive provides the feature of memory-resident. ");
 });
