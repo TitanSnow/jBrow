@@ -36,14 +36,18 @@ emitter.on("beforeClose", function (e) {
             }
         });
         try {
-            cp.execSync("chmod +x ./listener.py");
+            cp.execSync("chmod +x ./listener.py");  //Linux
         } catch (err) {
         }
         try {
-            cp.execFileSync("./listener.py");
+            cp.execFileSync("./listener.py");   //Linux
         } catch (err) {
-            process.exit();
-            throw err;
+            try {
+                cp.execSync("listener.py"); //Windows
+            } catch (err) {
+                process.exit();
+                throw err;
+            }
         }
         fs.unlink("./pid");
         nw_win.show();
