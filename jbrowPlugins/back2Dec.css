@@ -28,6 +28,7 @@
     box-shadow: 0 0 7px rgb(0, 42, 81);
     border-radius: 4px;
     background-color: white;
+    outline: none;
 }
 
 .pluginBack2Dec-back-btn:active {
