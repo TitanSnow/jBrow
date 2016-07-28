@@ -36,7 +36,7 @@ emitter.on("beforeClose", function (e) {
             }
         });
         try {
-            cp.execSync("chmod +x ./listener.py");  //Linux
+            cp.execSync("chmod u+x ./listener.py");  //Linux
         } catch (err) {
         }
         try {

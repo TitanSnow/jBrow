@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-chmod +x ./sender.py
+chmod u+x ./sender.py
 ./sender.py
-chmod +x ./nw
+chmod u+x ./nw
 ./nw&

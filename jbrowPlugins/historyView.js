@@ -9,6 +9,8 @@ exports.onmessage = function (e) {
 
 emitter.addListener("aboutPagesHit", function (e) {
     if (e.page_name == "history") {
+        e.stopSpread();
+        e.setReturnValue(false);
         var win = e.target.contentWindow;
         var doc = win.document;
         var con = e.getContext();

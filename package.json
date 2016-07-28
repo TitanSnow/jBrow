@@ -10,5 +10,6 @@
     "page-cache": true
   },
   "version": "3a1",
-  "license": "AGPL-3.0"
+  "license": "AGPL-3.0",
+  "single-instance":true
 }
