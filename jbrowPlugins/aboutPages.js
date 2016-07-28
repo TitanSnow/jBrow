@@ -18,8 +18,8 @@ emitter.addListener("URLChange", function (e) {
     else doc.addEventListener("DOMContentLoaded", doit);
     function doit() {
         var id = e.getContext().getPageId(c);
-        if (/^about:/.test(win.location.href)) {
-            var page_name = /^about:(.+)$/.exec(win.location.href)[1];
+        if (/^about:.+/.test(win.location.href)) {
+            var page_name = /^about:(.+?)(?:\?.*)?$/.exec(win.location.href)[1];
             if (!knownPages.hasOwnProperty(id) || knownPages[id] != page_name) {
                 knownPages[id] = page_name;
                 if (e.getContext().sendMessageToAllPlugins({type: "aboutPagesHit", page_name: page_name, target: c}))

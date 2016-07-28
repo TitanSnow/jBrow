@@ -16,7 +16,7 @@ emitter.addListener("aboutPagesHit", function (e) {
         return result[1];
     }
     
-    if (!/^search\?/.test(e.page_name)) return;
+    if (e.page_name!="search") return;
     e.stopSpread();
     e.setReturnValue(false);
     var ls = e.getContext().getWindow().localStorage;
