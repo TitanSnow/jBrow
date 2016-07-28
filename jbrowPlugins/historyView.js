@@ -11,7 +11,8 @@ emitter.addListener("aboutPagesHit", function (e) {
     if (e.page_name == "history") {
         e.stopSpread();
         e.setReturnValue(false);
-        var win = e.target.contentWindow;
+        var target = e.target;
+        var win = target.contentWindow;
         var doc = win.document;
         var con = e.getContext();
         var history = con.sendMessageToAllPlugins({type: "pluginHistoryViewGetHistory"});
@@ -119,6 +120,10 @@ emitter.addListener("aboutPagesHit", function (e) {
                             }
                         }
                         win.alert("Succeed 成功");
+                        win.location.reload();
+                        setTimeout(function(){
+                            con.sendMessageToAllPlugins({type:"URLChange",target:target});
+                        },1000);
                     }
                 });
                 form.getElementsByTagName("button")[1].addEventListener("click", function () {
@@ -126,7 +131,8 @@ emitter.addListener("aboutPagesHit", function (e) {
                 });
                 doc.body.appendChild(form);
             });
-            con.importCSS(doc, "./jbrowPlugins/historyView.css")
+            con.importCSS(doc, "./jbrowPlugins/historyView.css");
+            doc.title="History";
         }
     }
 });

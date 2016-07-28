@@ -20,8 +20,8 @@ emitter.addListener("URLChange", function (e) {
         var id = e.getContext().getPageId(c);
         if (/^about:.+/.test(win.location.href)) {
             var page_name = /^about:(.+?)(?:\?.*)?$/.exec(win.location.href)[1];
-            if (!knownPages.hasOwnProperty(id) || knownPages[id] != page_name) {
-                knownPages[id] = page_name;
+            if (knownPages[id] !== doc) {
+                knownPages[id] = doc;
                 if (e.getContext().sendMessageToAllPlugins({type: "aboutPagesHit", page_name: page_name, target: c}))
                     fs.exists("./jbrowAboutpages/" + page_name + ".html", function (exists) {
                         if (exists) {
