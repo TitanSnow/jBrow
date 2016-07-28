@@ -5,3 +5,4 @@ from socket import *
 
 sock = socket(AF_INET, SOCK_DGRAM, 0)
 sock.sendto(bytes(0), ("localhost", 13013))
+sock.close()
