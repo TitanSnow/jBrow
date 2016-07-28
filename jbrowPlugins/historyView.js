@@ -112,7 +112,6 @@ emitter.addListener("aboutPagesHit", function (e) {
                     var to = new Date(Number(m1[1]), Number(m1[2]), Number(m1[3]), Number(m1[4]), Number(m1[5]));
                     if (isNaN(+from) || isNaN(+to) || +from > +to) win.alert("Incorrect datetime! 非法的时间！");
                     else {
-                        win.console.log([+from, +to]);
                         var history = con.sendMessageToAllPlugins({type: "pluginHistoryViewGetHistory"});
                         for (var i = 0; i < history.length; ++i) {
                             if (history[i].time >= +from && history[i].time <= +to) {
@@ -120,7 +119,6 @@ emitter.addListener("aboutPagesHit", function (e) {
                             }
                         }
                         win.alert("Succeed 成功");
-                        win.console.log(history);
                     }
                 });
                 form.getElementsByTagName("button")[1].addEventListener("click", function () {
