@@ -51,7 +51,8 @@ emitter.on("beforeClose", function (e) {
         }
         fs.unlink("./pid");
         nw_win.show();
-        nw_win.focus();
+        nw_win.setAlwaysOnTop(true);
+        setTimeout(function(){nw_win.setAlwaysOnTop(false);},1000);
     }, 0);
 });
 
