@@ -17,7 +17,9 @@ emitter.addListener("ready", function (e) {
     button.classList.add("pluginReload-reload-btn");
     button.appendChild(doc.createTextNode("Reload"));
     button.addEventListener("click", function () {
-        con.getContentById(con.getFocusedPageId()).contentWindow.location.reload();
+        var c=con.getContentById(con.getFocusedPageId());
+        c.contentWindow.location.reload();
+        setTimeout(function(){con.sendMessageToAllPlugins({type:"URLChange",target:c});},0);
     });
     url_wrapper.insertBefore(button, url_form);
     con.importCSS("./jbrowPlugins/reload.css");
