@@ -8,4 +8,4 @@ if [ ! -x './nw' ]
 then
 	chmod u+x ./nw
 fi
-./nw $* &
+./nw $* > /dev/null 2>&1 &
