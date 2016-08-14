@@ -1,5 +1,11 @@
 #!/usr/bin/env sh
-chmod u+x ./sender.py
+if [ ! -x './sender.py' ]
+then
+	chmod u+x ./sender.py
+fi
 ./sender.py
-chmod u+x ./nw
+if [ ! -x './nw' ]
+then
+	chmod u+x ./nw
+fi
 ./nw $* &
